@@ -1,7 +1,12 @@
-# Freelancr — Project Scaffold
+# Freelancr
 
-Full-stack scaffold matching the technical document: Next.js (TypeScript) frontend,
-Django REST API, Django backend, PostgreSQL database.
+Freelancr is a web application for freelancers and small businesses to onboard clients, book meetings, and track the scope of their projects to prevent scope creep.
+
+## Technology Stack
+
+Front-end: Next.js, Typescript, TailwindCSS
+Backend: Python Django, Django REST
+Database: PostgreSQL
 
 ## Structure
 
@@ -37,13 +42,12 @@ fetches clients and projects from the API and requires auth (redirects to
 ## What's NOT implemented yet
 
 - AI transcript analysis (the "scope of truth" generation itself) — the model
-  and endpoint exist, but nothing populates `summary`/`key_points` yet. This is
-  where you'd call an LLM API, likely from an async task.
+  and endpoint exist, but nothing populates `summary`/`key_points` yet.
 - Payment gateway integration (Stripe/etc.) — model and endpoint exist, no
   provider wired up.
 - Email notifications.
 - File upload handling for transcripts is stubbed via DRF's `FileField`, but
-  there's no processing pipeline behind it.
+  there's no processing pipeline behind it yet.
 - Client/project "add" buttons on the dashboard are placeholders (no forms yet).
 
 ## Running it locally
@@ -73,11 +77,3 @@ npm run dev
 
 Runs on `http://localhost:3000`, expects the API at `http://localhost:8000/api`
 (override with `NEXT_PUBLIC_API_URL` in a `.env.local` file if needed).
-
-## Suggested next steps
-
-1. Add forms for creating clients/projects/meetings from the dashboard.
-2. Wire up transcript upload to actually store the file and text.
-3. Pick an LLM provider and build the async job that turns a transcript into a
-   scope of truth (Celery + Redis is the common Django pairing for this).
-4. Add tests for the auth flow and the ownership-scoping on querysets.
